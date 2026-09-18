@@ -1,0 +1,100 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --font-sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-display: "IBM Plex Serif", "Iowan Old Style", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --color-bg: #f3eee6;
+  --color-bg-elevated: #faf7f1;
+  --color-bg-ink: #1a1614;
+  --color-fg: #1a1614;
+  --color-fg-muted: #6b635b;
+  --color-fg-subtle: #8a8278;
+  --color-border: #d8d0c4;
+  --color-border-strong: #b8ae9f;
+  --color-accent: #c4122e;
+  --color-accent-fg: #faf7f1;
+  --color-hdpe: #c4122e;
+  --color-hdpe-soft: #f8e6e8;
+  --color-lldpe: #1e3a5f;
+  --color-lldpe-soft: #e4ebf3;
+  --color-pp: #2d5a45;
+  --color-pp-soft: #e4efe8;
+  --color-ring: #c4122e;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  --shadow-sheet: 0 1px 0 rgba(26, 22, 20, 0.04), 0 12px 32px -16px rgba(26, 22, 20, 0.18);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+    font-family: var(--font-display);
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  body {
+    background: white;
+  }
+
+  header.sticky,
+  .no-print,
+  [data-radix-dialog-overlay] {
+    display: none !important;
+  }
+
+  [data-radix-dialog-content] {
+    position: static !important;
+    transform: none !important;
+    max-height: none !important;
+    width: 100% !important;
+    max-width: none !important;
+    overflow: visible !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .print-break {
+    break-inside: avoid;
+  }
+}
