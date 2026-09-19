@@ -1,4 +1,4 @@
-import { Search, GitCompareArrows, X } from "lucide-react";
+import { Search, GitCompareArrows, X } from "@/components/icons";
 import { useMemo, useState } from "react";
 import { BrandMark } from "@/components/brand-mark";
 import { CompareSheet } from "@/components/compare-sheet";

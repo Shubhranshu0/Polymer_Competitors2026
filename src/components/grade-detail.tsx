@@ -1,4 +1,4 @@
-import { Printer } from "lucide-react";
+import { Printer } from "@/components/icons";
 import { familyStyle } from "@/lib/family-style";
 import type { Grade } from "@/lib/types";
 import { cn } from "@/lib/utils";

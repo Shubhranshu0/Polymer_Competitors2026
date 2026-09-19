@@ -1,5 +1,5 @@
 import type { ErrorComponentProps } from "@tanstack/react-router";
-import { TriangleAlert } from "lucide-react";
+import { TriangleAlert } from "@/components/icons";
 
 const FALLBACK_MESSAGE = "An unexpected error occurred. Try reloading the page.";
 

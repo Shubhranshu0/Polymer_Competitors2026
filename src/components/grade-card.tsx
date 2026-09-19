@@ -1,4 +1,4 @@
-import { GitCompareArrows } from "lucide-react";
+import { GitCompareArrows } from "@/components/icons";
 import { familyStyle } from "@/lib/family-style";
 import type { Grade } from "@/lib/types";
 import { cn } from "@/lib/utils";
