@@ -458,11 +458,11 @@ var findRouteRules = /* @__PURE__ */ (() => {
 		return r;
 	};
 })();
-var _lazy_hBn8Kl = defineLazyEventHandler(() => import("./_chunks/ssr-renderer.mjs"));
+var _lazy_yocYXP = defineLazyEventHandler(() => import("./_chunks/ssr-renderer.mjs"));
 var findRoute = /* @__PURE__ */ (() => {
 	const data = {
 		route: "/**",
-		handler: _lazy_hBn8Kl
+		handler: _lazy_yocYXP
 	};
 	return ((_m, p) => {
 		return {
@@ -612,42 +612,21 @@ function getRouteRules(method, pathname) {
 	};
 }
 //#endregion
-//#region node_modules/nitro/dist/presets/vercel/runtime/isr.mjs
-var ISR_URL_PARAM = "__isr_route";
-function isrRouteRewrite(reqUrl, xNowRouteMatches) {
-	if (xNowRouteMatches) {
-		const isrURL = new URLSearchParams(xNowRouteMatches).get(ISR_URL_PARAM);
-		if (isrURL) return [decodeURIComponent(isrURL), ""];
-	} else {
-		const queryIndex = reqUrl.indexOf("?");
-		if (queryIndex !== -1) {
-			const params = new URLSearchParams(reqUrl.slice(queryIndex + 1));
-			const isrURL = params.get(ISR_URL_PARAM);
-			if (isrURL) {
-				params.delete(ISR_URL_PARAM);
-				return [decodeURIComponent(isrURL), params.toString()];
-			}
-		}
-	}
-}
-//#endregion
-//#region node_modules/nitro/dist/presets/vercel/runtime/vercel.web.mjs
+//#region node_modules/nitro/dist/presets/netlify/runtime/netlify.mjs
 var nitroApp = useNitroApp();
-var vercel_web_default = { async fetch(req, context) {
-	const isrURL = isrRouteRewrite(req.url, req.headers.get("x-now-route-matches"));
-	if (isrURL) {
-		const { routeRules } = getRouteRules("", isrURL[0]);
-		if (routeRules?.isr) req = new Request(new URL(isrURL[0] + (isrURL[1] ? `?${isrURL[1]}` : ""), req.url).href, req);
+var ONE_YEAR_IN_SECONDS = 31536e3;
+var handler = async (req) => {
+	req.runtime ??= { name: "netlify" };
+	req.ip ??= req.headers.get("x-nf-client-connection-ip") || void 0;
+	const response = await nitroApp.fetch(req);
+	const isr = (req.context?.routeRules || {})?.isr?.options;
+	if (isr) {
+		const maxAge = typeof isr === "number" ? isr : ONE_YEAR_IN_SECONDS;
+		const revalidateDirective = typeof isr === "number" ? `stale-while-revalidate=${ONE_YEAR_IN_SECONDS}` : "must-revalidate";
+		if (!response.headers.has("Cache-Control")) response.headers.set("Cache-Control", "public, max-age=0, must-revalidate");
+		response.headers.set("Netlify-CDN-Cache-Control", `public, max-age=${maxAge}, ${revalidateDirective}, durable`);
 	}
-	req.runtime ??= { name: "vercel" };
-	req.runtime.vercel = { context };
-	let ip;
-	Object.defineProperty(req, "ip", { get() {
-		const h = req.headers.get("x-forwarded-for");
-		return ip ??= h?.split(",").shift()?.trim();
-	} });
-	req.waitUntil = context?.waitUntil;
-	return nitroApp.fetch(req);
-} };
+	return response;
+};
 //#endregion
-export { vercel_web_default as default };
+export { handler as default };

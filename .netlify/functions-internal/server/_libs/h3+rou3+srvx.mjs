@@ -1,4 +1,10 @@
 import { PassThrough, Readable } from "node:stream";
+//#region node_modules/h3/node_modules/rou3/dist/index.mjs
+var NullProtoObj = /* @__PURE__ */ (() => {
+	const e = function() {};
+	return e.prototype = Object.create(null), Object.freeze(e.prototype), e;
+})();
+//#endregion
 //#region node_modules/srvx/dist/_chunks/_url.mjs
 function lazyInherit(target, source, sourceKey) {
 	for (const key of [...Object.getOwnPropertyNames(source), ...Object.getOwnPropertySymbols(source)]) {
@@ -243,12 +249,6 @@ var NodeResponse = /* @__PURE__ */ (() => {
 	Object.setPrototypeOf(NodeResponse, NativeResponse);
 	Object.setPrototypeOf(NodeResponse.prototype, NativeResponse.prototype);
 	return NodeResponse;
-})();
-//#endregion
-//#region node_modules/h3/node_modules/rou3/dist/index.mjs
-var NullProtoObj = /* @__PURE__ */ (() => {
-	const e = function() {};
-	return e.prototype = Object.create(null), Object.freeze(e.prototype), e;
 })();
 //#endregion
 //#region node_modules/h3/dist/h3.mjs
