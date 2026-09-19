@@ -1,7 +1,7 @@
-//#region node_modules/.nitro/vite/services/ssr/assets/_tanstack-start-manifest_v-DQLgImks.js
+//#region node_modules/.nitro/vite/services/ssr/assets/_tanstack-start-manifest_v-lLVlDN7G.js
 var tsrStartManifest = () => ({ routes: {
 	__root__: {
-		filePath: "/tmp/cc-agent/71229973/project/src/routes/__root.tsx",
+		filePath: "/home/project/src/routes/__root.tsx",
 		children: ["/"],
 		preloads: ["/assets/index-CbDMxYEe.js"],
 		scripts: [{ attrs: {
@@ -11,7 +11,7 @@ var tsrStartManifest = () => ({ routes: {
 		} }]
 	},
 	"/": {
-		filePath: "/tmp/cc-agent/71229973/project/src/routes/index.tsx",
+		filePath: "/home/project/src/routes/index.tsx",
 		children: void 0,
 		preloads: ["/assets/routes-DvJgFaxs.js"]
 	}
